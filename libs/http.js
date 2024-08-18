@@ -1,12 +1,9 @@
 import axios from "axios";
-
-
  let url = " http://localhost:3001/"
 
 async function getData(path) {
    try {
       let res = await axios.get(`${url}/${path}`)
-
       return res
    } catch (error) {
       console.error(error);

@@ -33,7 +33,7 @@ header{
 
   .left-header-cont,
   .right-header-cont{
-      font-size: larger;
+
       display: flex;
       align-items: center;
       gap: 25px;
@@ -52,9 +52,15 @@ header{
           color: black;
           text-decoration: none;
       }
+
+    
   }
 }
-
+.active:hover{
+  background-color: #d4d5d6;
+  padding: 10px;
+  transition: all 0.3s ease;
+ }
 .dropbtn {
 border-radius: 4px;
   background-color: #EAEAF9;

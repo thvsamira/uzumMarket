@@ -22,9 +22,24 @@ var swiper = new Swiper(".mySwiper", {
     },
   });
 
+export function modalOpen () {
+  const modal = document.querySelector('.modal')
+  const modalOpen = document.querySelector('.user-box')
+  const close = document.querySelector('.modal__close')
+  modalOpen.onclick = () => {
+    modal.style.display = 'block'
+    modal.classList.add ('fade')
+  }
  
-  getData('goods')
-  .then(res => {
-    console.log(reload(res.data));
-  })
-  .catch(errpr => console.error(errpr))
+close.onclick = () => {
+  modal.style.display = 'none'
+}
+}
+
+modalOpen()
+ 
+  // getData('goods')
+  // .then(res => {
+  //   console.log(reload(res.data));
+  // })
+  // .catch(errpr => console.error(errpr))

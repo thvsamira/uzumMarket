@@ -50,13 +50,13 @@
                 </div>
             </form>
 
-            <div class="user-box">
+            <div class="user-box active">
                 <img src="/Group 237729.png" alt="">
                 <span class="user-name">name</span>
             </div>
 
-            <a href="" class="favourite none-decoration">Избранное</a>
-            <a href="" class="korzina none-decoration">Корзина <span class="quantity">3</span></a>
+            <a href="/pages/favourite/" class="favourite none-decoration active">Избранное</a>
+            <a href="" class="korzina none-decoration active">Корзина <span class="quantity">3</span></a>
         </div>
     </div>
 </section>
