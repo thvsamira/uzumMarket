@@ -45,7 +45,11 @@ function generateToken() {
   return res;
 }
 
- 
+document.getElementById('likeIcon').addEventListener('click', function() {
+  this.classList.toggle('fill');
+});
+
+
   getData('goods')
   .then(res => {
     console.log(reload(res.data));

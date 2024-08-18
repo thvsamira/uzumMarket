@@ -255,14 +255,29 @@ body {
   }
 
 
-  .like{
-    position: absolute;
-    top: 8px;
-    left: 200px;
-  background: none;
-  border: 0;
+
+.like-icon {
+  position: absolute;
+  top: 5px;
+  left: 200px;
+background: none;
+border: 0;
+cursor: pointer;
   cursor: pointer;
-  }
+  transition: transform 0.3s ease; 
+}
+
+.like-icon svg {
+  width: 25px;
+  height: auto;
+  color: gray; 
+}
+
+.like-icon.fill svg {
+  fill: #7000FF;
+  color: #7000FF;
+}
+
 
   .info{
     height: 150px;
