@@ -5,12 +5,13 @@
 }
 
 .container{
-    max-width: 1240px;
+    max-width: 1440px;
+    padding: 10px 30px;
     width: 100%;
     margin: 0 auto;
 }
 
-
+/* ----- M O D A L ----- */
 .modal {
   position: fixed;
   top: 0;
@@ -128,6 +129,11 @@
   }
 }
 
+/* ----- M O D A L ----- */
+
+
+/* ----- S W I P E R ----- */
+
 html,
 body {
   position: relative;
@@ -168,12 +174,12 @@ body {
  
     font-family: Inter;
  border-radius: 12px ;
-  padding:  20px;
+  
   font-size: 18px;
   background: linear-gradient(87deg, #9643ff 1.53%, #5200ba 98.76%);
  color: white;
   .swiper-box{
-    padding: 50px 130px;
+    padding: 30px 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -191,12 +197,11 @@ body {
 
   .swiper-img{
     width: 100%;
-    height: 370px;
+    height: 390px;
     object-fit: cover;
   }
 
-
-
+/* ----- S W I P E R ----- */
 
 
 .place{
@@ -211,24 +216,25 @@ body {
   }
 }
 .place__items{
+  padding-bottom: 30px;
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
+  gap: 30px;
 }
 
 .item{
   width: 100%;
+  max-width: 230px;
   height: 100%;
   border-radius: 8px;
-
+  position: relative;
   .img-box{
     background-color: #d1d1d2;
     display: block;
     border-radius: 12px;
     width: 100%;
-    height: 300px;
-    position: relative;
+    height: 290px;
     overflow: hidden;
     box-shadow: 0 0 0 3px rgb(224, 224, 224);
     cursor: pointer;
@@ -251,33 +257,35 @@ body {
 
   .like{
     position: absolute;
-    top: 718px;
-    right: 1115px;
+    top: 8px;
+    left: 200px;
   background: none;
   border: 0;
   cursor: pointer;
   }
 
   .info{
-    height: 120px;
+    height: 150px;
   display: flex;
   flex-direction: column;
-  padding: 12px 8px 8px;
+  gap: 15px;
+  padding: 15px 0px 8px;
   position: relative;
   user-select: none;
   cursor: pointer;
-
   .title{
     font-family: Inter;
-  font-size: 12.8px;
+  font-size: 14.8px;
   line-height: 15.36px;
   max-height: 43px;
+ 
   }
+
 
   .rating{
     display: flex;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 15px;
   gap: 4px;
   color: #8b8e99;
   font-family: Inter;
@@ -315,7 +323,7 @@ body {
   .add-cart{
     position: absolute;
   right: 2px;
-  bottom: 2px;
+  bottom: 8px;
   background: none;
   border-radius: 50%;
   border: none;

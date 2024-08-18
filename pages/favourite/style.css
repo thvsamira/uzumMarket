@@ -5,7 +5,25 @@
 }
 
 .container{
-    max-width: 1240px;
+    max-width: 1440px;
+    padding: 10px 30px;
     width: 100%;
     margin: 0 auto;
+}
+
+.favourite-box{
+    margin-top: 30px;
+
+    h1{
+        font-family: Gilroy;
+font-size: 32px;
+font-weight: 600;
+line-height: 39.2px;
+text-align: left;
+
+    }
+}
+
+.fav-slots-place{
+    margin-top: 40px;
 }

@@ -5,7 +5,8 @@
 }
 
 .container{
-    max-width: 1240px;
+    max-width: 1440px;
+    padding: 10px 30px;
     width: 100%;
     margin: 0 auto;
 }
@@ -133,10 +134,17 @@ border-radius: 4px;
   }
 }
 
-.user-box{
+.user-box,
+.basket-box,
+.fav-box
+{
   display: flex;
   align-items: center;
   gap: 6px;
+
+  img{
+    width: 18px;
+  }
 }
 
 .favourite,

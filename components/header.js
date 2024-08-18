@@ -55,8 +55,14 @@
                 <span class="user-name">name</span>
             </div>
 
+            <div class="fav-box active">
+            <img src="/Untitled-5-28-128.webp" alt="">
             <a href="/pages/favourite/" class="favourite none-decoration active">Избранное</a>
-            <a href="" class="korzina none-decoration active">Корзина <span class="quantity">3</span></a>
+            </div>
+            <div class="basket-box active">
+            <img src="/95-shopping-512.webp" alt="">
+            <a href="" class="korzina none-decoration">Корзина <span class="quantity">3</span></a>
+            </div>
         </div>
     </div>
 </section>

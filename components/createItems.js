@@ -6,8 +6,7 @@ export function CreateItem(item) {
     const imgBox = document.createElement('div');
     imgBox.className = 'img-box';
     const img = document.createElement('img');
-    img.src = '/cftak6nhj8j9g698g33g.png';
-    img.alt = '';
+    img.src = item.media[0];
     imgBox.appendChild(img);
     item.appendChild(imgBox);
 
@@ -27,7 +26,8 @@ export function CreateItem(item) {
     // Заголовок
     const title = document.createElement('h2');
     title.className = 'title';
-    title.textContent = item.title;
+    title.innerHTML = 
+    item.title.length > 70 ? item.title.slice(0, 70) + "..." : item.title;
     info.appendChild(title);
 
     // Блок рейтинга
