@@ -1,9 +1,10 @@
 // import { Genres } from "./components/genres";
-import { makeHeader } from "./components/header";
+import { makeFooter, makeHeader } from "./components/required";
 import { getData } from "./libs/http";
 import { mainSwiper, reload } from "./libs/utils";
-mainSwiper()
 makeHeader()
+mainSwiper()
+makeFooter()
 
 const modal = document.querySelector('.modal')
 const modalOpen = document.querySelector('.user-box')

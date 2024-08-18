@@ -65,3 +65,8 @@ export function CreateItem(item) {
 
     return item;
 }
+
+
+export function CreateFavItems(item){
+    
+}
