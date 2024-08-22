@@ -1,7 +1,9 @@
 // import { Genres } from "./components/genres";
+import { CreateItem } from "./components/createItems";
 import { makeFooter, makeHeader } from "./components/required";
 import { getData } from "./libs/http";
 import { mainSwiper, reload } from "./libs/utils";
+
 makeHeader()
 mainSwiper()
 makeFooter()
@@ -46,13 +48,13 @@ function generateToken() {
   return res;
 }
 
-document.getElementById('likeIcon').addEventListener('click', function() {
-  this.classList.toggle('fill');
-});
+// document.getElementById('likeIcon').addEventListener('click', function() {
+//   this.classList.toggle('fill');
+// });
 
 
-  getData('goods')
+getData('goods')
   .then(res => {
-    console.log(reload(res.data));
+    reload(res.data.slice(0,10), "place-items", CreateItem)
   })
   .catch(error => console.error(error))
