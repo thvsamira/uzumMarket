@@ -32,8 +32,12 @@ export function makeHeader() {
                     <img src="" alt="">
                     Каталог
                 </button>
-                <div class="dropdown-content">
-                <a href="#">Link 1</a>
+                <div class="dropdown-content" id="dropdown">
+                <a  href="/pages/furniture/" class="category">Мебель <span class="goods-numb">10 товаров</span></a>
+                <a  href="/pages/PC/" class="category">Электроника <span class="goods-numb">10 товаров</span></a>
+                <a  href="/pages/audio/" class="category">Наушники и аудиотехника <span class="goods-numb">10 товаров</span></a>
+                <a  href="/pages/TV/" class="category">Телевизоры <span class="goods-numb">10 товаров</span></a>
+                <a  href="/pages/kitchen/" class="category">Товары для кухни <span class="goods-numb">10 товаров</span></a>
                 </div>
               </div>
 
@@ -150,3 +154,27 @@ export function makeFooter() {
 
 	`;
 }
+
+export function modal() {
+	let modal = document.querySelector('.modal')
+	modal.innerHTML = `
+
+    <div class="modal__dialog">
+      <div class="modal__content">
+        <form action="#" name="account">
+          <div data-close class="modal__close">&times;</div>
+          <div class="modal__title">Введите ваши данные</div>
+          <div class="modal__text">Отправим смс с кодом подтверждения</div>
+          <input required placeholder="Ваше имя" name="name" type="text" class="modal__input required">
+          <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input required">
+          <button class="btn btn_dark btn_min">Получить код</button>
+          <p class="privacy-text">Авторизуясь, вы соглашаетесь c <a href="" class="blue-text">политикой <br>  
+            обработки персональных данных</a> </p>
+        </form>
+      </div>
+    </div>
+
+	`
+
+}
+

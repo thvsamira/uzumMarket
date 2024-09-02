@@ -1,16 +1,15 @@
-import { makeHeader } from "../../components/header";
-
+import {  CreateProductElement, DisplayImg} from "../../components/createItems";
+import { makeHeader } from "../../components/required";
+import { getData } from "../../libs/http";
+import { cartSwiper, mainSwiper, reload } from "../../libs/utils";
+cartSwiper()
+mainSwiper()
 makeHeader()
 
-
-var swiper = new Swiper(".mySwiper", {
-    direction: "vertical",
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      }
-  });
+let slotId = localStorage.getItem('slotId')
+getData(`goods?id=${slotId}`)
+.then(res => {
+  reload(res.data, 'product-cont', CreateProductElement)
+  reload(res.data, 'item-swiper', DisplayImg)
+})
+.catch(error => console.error(error))

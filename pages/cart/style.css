@@ -4,45 +4,164 @@
     box-sizing: border-box;
 }
 
-.container{
-    max-width: 1240px;
-    width: 100%;
-    margin: 0 auto;
-}
 
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-.swiper {
-  width: 85px;
-  height: 500px;
-}
-
-.swiper-slide {
-  height: 110px;
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
+.swiper-box{
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  gap: 18px;
 }
 
-.swiper-slide img {
-  display: block;
+.vertical-swiper {
+  width: 130px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+
+.swiper{
+  max-width: 400px;
   width: 100%;
-  height: 100%;
+  height: 500px;
+
+  .swiper-slide{
+    border-radius: 0px;
+    width: 400px;
+    height: 490px;
+   
+    .swiper-img{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .swiper-img img{
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.vertical-img-box{
+  width: 100%;
+  height: 130px;
+  background-color: black;
+}
+
+.vertical-img{
+  width: 100%;
   object-fit: cover;
+}
+
+.product-container {
+  display: flex;
+  align-items: center;
+  
+  width: 100%;
+  gap: 40px;
+    margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.product-images {
+  width: 40%;
+  padding-right: 20px;
+}
+
+.product-image-main {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product-thumbnails {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnail {
+  width: 20%;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-details {
+  width: 60%;
+  padding-left: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.current-price {
+  color: #e63946;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #777;
+}
+
+.product-quantity {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  border-bottom: 2px solid gray;
+}
+
+.product-quantity button {
+  background-color: #ddd;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.product-quantity input {
+  width: 40px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.product-description {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.product-buttons button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.add-to-cart {
+  color: #fff;
+  background-color: #7000ff;
+  border-radius: 5px;
+}
+
+.add-to-favorites {
+  color: #7000ff;
+  border:  1px solid black;
+  border-radius: 5px;
 }

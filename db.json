@@ -57,7 +57,7 @@
           "black",
           "orange"
         ],
-        "rating": 3.8,
+        "rating": 3.8,  
         "price": 14999,
         "isBlackFriday": true,
         "salePercentage": 20,

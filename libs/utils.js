@@ -29,4 +29,14 @@ function mainSwiper(){
       });
 }
 
-export{ reload, mainSwiper }
+function cartSwiper() {
+  var swiper = new Swiper(".vertical", {
+    direction: "vertical",
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+}
+
+export{ reload, mainSwiper, cartSwiper }

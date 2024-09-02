@@ -1,3 +1,4 @@
+
 export function CreateItem(item) {
 const itemDiv = document.createElement('div');
 itemDiv.className = 'item';
@@ -16,7 +17,6 @@ imgBoxDiv.appendChild(imgElement);
 // Создаем div для иконки лайка
 const likeIconDiv = document.createElement('div');
 likeIconDiv.className = 'like-icon';
-// liked.id = 'like';
 
 // Создаем SVG и добавляем его в likeIconDiv
 const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -30,16 +30,24 @@ svgElement.setAttribute('stroke-linejoin', 'round');
 const pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 pathElement.setAttribute('d', 'M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z');
 
+// Инициализация массива favorites из localStorage или пустого массива
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
 likeIconDiv.addEventListener('click', function() {
     this.classList.toggle('fill');
+
     if (this.classList.contains('fill')) {
-        localStorage.setItem('like', item.id); 
-        window.location.href = '/pages/favourite/'; 
+        if (!favorites.some(fav => fav.id === item.id)) {
+            favorites.push(item);
+        }
+        localStorage.setItem('favorites', JSON.stringify(favorites));
     } else {
-        localStorage.removeItem('like');
+        favorites = favorites.filter(fav => fav.id !== item.id);
+        // Обновляем localStorage
+        localStorage.setItem('favorites', JSON.stringify(favorites));
     }
-    
 });
+
 // Добавляем path в svg
 svgElement.appendChild(pathElement);
 likeIconDiv.appendChild(svgElement);
@@ -76,11 +84,22 @@ costBoxDiv.className = 'cost-box';
 
 // Создаем элемент p для стоимости
 const costP = document.createElement('p');
+const saleP = document.createElement('p')
 costP.className = 'cost';
+saleP.className = 'sale'
 costP.textContent = `${item.price} сум`;
 
+if (item.salePercentage) {
+    costP.style.textDecoration =   'line-through'
+    costP.style.color = 'gray'
+    saleP.textContent = `${
+       Math.floor(item.price - (item.price * item.salePercentage) / 100)
+    } сум`;
+
+} 
+
 // Добавляем p в costBoxDiv
-costBoxDiv.appendChild(costP);
+costBoxDiv.append(costP, saleP);
 
 // Создаем кнопку для добавления в корзину
 const addCartButton = document.createElement('button');
@@ -90,6 +109,20 @@ addCartButton.className = 'add-cart';
 const cartImg = document.createElement('img');
 cartImg.src = '/shopping-cart 1.png';
 cartImg.alt = '';
+
+let basket = JSON.parse(localStorage.getItem('basket')) || [];
+
+// Предполагается, что cartImg — это элемент изображения на странице
+cartImg.onclick = () => {
+    // Добавляем элемент в массив корзины
+    basket.push(item);
+
+    // Сохраняем обновлённый массив корзины в локальном хранилище
+    localStorage.setItem('basket', JSON.stringify(basket));
+
+    console.log('Товар добавлен в корзину:', item);
+    console.log('Текущая корзина:', basket);
+};
 
 // Добавляем img в кнопку
 addCartButton.appendChild(cartImg);
@@ -105,11 +138,197 @@ itemDiv.appendChild(likeIconDiv);
 itemDiv.appendChild(infoDiv);
 
 
+// itemDiv.onclick = () => {
+//     localStorage.setItem('slotId', item.id);
+//     location.href = '/pages/cart/';
+// };
 
     return itemDiv;
 }
 
 
-export function CreateFavItems(item){
-    
+// Функция для создания и добавления элементов
+export function CreateProductElement(item) {
+    // const verticalSwiper = document.createElement('div');
+    // verticalSwiper.className = 'vertical-swiper';
+    // verticalSwiper.id = 'vertical-swiper';
+
+    // // Добавляем изображения в вертикальный слайдер
+    // const verticalImgBox1 = document.createElement('div');
+    // verticalImgBox1.className = 'vertical-img-box';
+    // const verticalImg1 = document.createElement('img');
+    // verticalImg1.src = item.media[0];
+    // verticalImg1.alt = '';
+    // verticalImg1.className = 'vertical-img';
+    // verticalImgBox1.appendChild(verticalImg1);
+
+
+    // // Добавляем созданные элементы в вертикальный слайдер
+    // verticalSwiper.appendChild(verticalImgBox1);
+
+    // Добавляем слайдеры в контейнер
+    // swiperBox.appendChild(verticalSwiper);
+  
+
+    // Создаем элементы для деталей продукта
+    const productDetails = document.createElement('div');
+    productDetails.className = 'product-details';
+
+    const productTitle = document.createElement('h1');
+    productTitle.textContent = item.title
+
+    const costBoxDiv = document.createElement('div');
+    costBoxDiv.className = 'cost-box';
+    const costP = document.createElement('p');
+const saleP = document.createElement('p')
+costP.className = 'cost';
+saleP.className = 'sale'
+costP.textContent = `${item.price} сум`;
+
+if (item.salePercentage) {
+    costP.style.textDecoration =   'line-through'
+    costP.style.color = 'gray'
+    saleP.textContent = `${
+       Math.floor(item.price - (item.price * item.salePercentage) / 100)
+    } сум`;
+
+} 
+
+    costBoxDiv.appendChild(costP);
+    costBoxDiv.appendChild(saleP);
+
+    const productQuantity = document.createElement('div');
+    productQuantity.className = 'product-quantity';
+
+    const minusButton = document.createElement('button');
+    minusButton.textContent = '-';
+
+    const quantityInput = document.createElement('input');
+    quantityInput.type = 'number';
+    quantityInput.value = '1';
+    quantityInput.min = '1';
+
+    const plusButton = document.createElement('button');
+    plusButton.textContent = '+';
+
+    productQuantity.appendChild(minusButton);
+    productQuantity.appendChild(quantityInput);
+    productQuantity.appendChild(plusButton);
+
+    const productDescription = document.createElement('p');
+    productDescription.className = 'product-description';
+    productDescription.textContent = item.description;
+
+    const productButtons = document.createElement('div');
+    productButtons.className = 'product-buttons';
+
+    const addToCartButton = document.createElement('button');
+    addToCartButton.className = 'add-to-cart';
+    addToCartButton.textContent = 'Добавить в корзину';
+
+    const addToFavoritesButton = document.createElement('button');
+    addToFavoritesButton.className = 'add-to-favorites';
+    addToFavoritesButton.textContent = 'Добавить в избранное';
+
+    productButtons.appendChild(addToCartButton);
+    productButtons.appendChild(addToFavoritesButton);
+
+    // Собираем все элементы для деталей продукта
+    productDetails.appendChild(productTitle);
+    productDetails.appendChild(costBoxDiv);
+    productDetails.appendChild(productQuantity);
+    productDetails.appendChild(productDescription);
+    productDetails.appendChild(productButtons);
+
+    return productDetails
+}
+
+export function DisplayImages(item) {
+    // Получаем контейнеры слайдеров из DOM
+    const verticalSwiper = document.getElementById('vertical-swiper');
+    const horizontalSwiperWrapper = document.getElementById('item-swiper');
+
+
+
+    // Очищаем текущие элементы в контейнерах
+    verticalSwiper.innerHTML = '';
+    horizontalSwiperWrapper.innerHTML = '';
+
+    // Создаем и добавляем элементы в вертикальный и горизонтальный слайдеры
+    item.media.forEach((imageSrc) => {
+        // Добавляем изображения в вертикальный слайдер
+        const verticalImgBox = document.createElement('div');
+        verticalImgBox.className = 'vertical-img-box';
+
+        const verticalImg = document.createElement('img');
+        verticalImg.src = imageSrc;
+        verticalImg.alt = '';
+        verticalImg.className = 'vertical-img';
+
+        verticalImgBox.appendChild(verticalImg);
+        verticalSwiper.appendChild(verticalImgBox);
+
+        // Добавляем изображения в горизонтальный слайдер
+        const swiperSlide = document.createElement('div');
+        swiperSlide.className = 'swiper-slide';
+
+        const swiperImg = document.createElement('div');
+        swiperImg.className = 'swiper-img';
+
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.alt = 'Product Image';
+
+        swiperImg.appendChild(img);
+        swiperSlide.appendChild(swiperImg);
+        horizontalSwiperWrapper.appendChild(swiperSlide);
+    });
+    return horizontalSwiperWrapper , verticalSwiper
+}
+
+
+export function DisplayImg(item) {
+    const fragment = document.createDocumentFragment(); // Используем фрагмент для оптимальной вставки
+ 
+    // verticalSwiper.className = 'vertical-swiper';
+    // verticalSwiper.id = 'vertical-swiper';
+
+    // // Добавляем изображения в вертикальный слайдер
+    // const verticalImgBox1 = document.createElement('div');
+    // verticalImgBox1.className = 'vertical-img-box';
+    // const verticalImg1 = document.createElement('img');
+    // verticalImg1.src = item.media[0];
+    // verticalImg1.alt = '';
+    // verticalImg1.className = 'vertical-img';
+    // verticalImgBox1.appendChild(verticalImg1);
+
+
+    // // Добавляем созданные элементы в вертикальный слайдер
+    // verticalSwiper.appendChild(verticalImgBox1);
+
+    // Добавляем слайдеры в контейнер
+    // swiperBox.appendChild(verticalSwiper);
+    item.media.forEach((imageSrc) => {
+  
+        // Создаем контейнер для слайда
+        const swiperSlide = document.createElement('div');
+        swiperSlide.classList.add('swiper-slide');
+
+        const swiperImg = document.createElement('div');
+        swiperImg.classList.add('swiper-img');
+
+        // Создаем элемент изображения
+        const img = document.createElement('img');
+        img.src = imageSrc; // Устанавливаем URL изображения из массива
+        img.alt = 'Product Image';
+
+        // Встраиваем элементы друг в друга
+        swiperImg.appendChild(img);
+        swiperSlide.appendChild(swiperImg);
+
+        // Добавляем слайд в фрагмент
+        fragment.append(swiperSlide);
+    });
+
+    return fragment; // Возвращаем фрагмент, содержащий все слайды
 }
