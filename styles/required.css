@@ -315,32 +315,26 @@ body {
       height: 32px;
       background-color: transparent;
       border-radius: 50%;
-      border: 3px solid white;
+      border: 3px solid gray;
       opacity: .5;
       &::after {
           font-size: 18px;
           font-weight: 700;
-          color: white;
+          color: gray;
       }
     
   }
 }
 
 .swiper-slide {
+ width: 100%;
  
-    font-family: Inter;
- border-radius: 12px ;
-  
-  font-size: 18px;
- color: white;
-
+   img{
+	 width: 100%;
+	 object-fit: cover;
+   }
   
 }
-
-  .swiper-img{
-    width: 100%;
-    object-fit: cover;
-  }
 
 
 

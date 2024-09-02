@@ -41,6 +41,7 @@ likeIconDiv.addEventListener('click', function() {
             favorites.push(item);
         }
         localStorage.setItem('favorites', JSON.stringify(favorites));
+        localStorage.setItem('liked', item.id)
     } else {
         favorites = favorites.filter(fav => fav.id !== item.id);
         // Обновляем localStorage
@@ -138,10 +139,10 @@ itemDiv.appendChild(likeIconDiv);
 itemDiv.appendChild(infoDiv);
 
 
-// itemDiv.onclick = () => {
-//     localStorage.setItem('slotId', item.id);
-//     location.href = '/pages/cart/';
-// };
+itemDiv.onclick = () => {
+    localStorage.setItem('slotId', item.id);
+    location.href = '/pages/cart/';
+};
 
     return itemDiv;
 }
@@ -176,6 +177,22 @@ export function CreateProductElement(item) {
 
     const productTitle = document.createElement('h1');
     productTitle.textContent = item.title
+
+    // Создаем div для рейтинга
+const ratingDiv = document.createElement('div');
+ratingDiv.className = 'rating';
+
+// Создаем элемент img для звезды
+const starImg = document.createElement('img');
+starImg.src = '/star-512.webp';
+
+// Создаем элемент p для рейтинга
+const ratingP = document.createElement('p');
+ratingP.textContent = item.rating;
+
+// Добавляем img и p в ratingDiv
+ratingDiv.appendChild(starImg);
+ratingDiv.appendChild(ratingP);
 
     const costBoxDiv = document.createElement('div');
     costBoxDiv.className = 'cost-box';
@@ -230,15 +247,80 @@ if (item.salePercentage) {
     addToFavoritesButton.className = 'add-to-favorites';
     addToFavoritesButton.textContent = 'Добавить в избранное';
 
+    const infoBox = document.createElement('div');
+    infoBox.className = 'info-box';
+  
+    // Первая секция - Быстрая доставка
+    const deliverySection = document.createElement('div');
+    deliverySection.className = 'info-item';
+    
+    const deliveryTitle = document.createElement('h3');
+    deliveryTitle.textContent = 'Быстрая доставка от 1 дня';
+    
+    const deliveryText = document.createElement('p');
+    deliveryText.textContent = 'В пункты выдачи Uzum или курьером';
+    
+    deliverySection.appendChild(deliveryTitle);
+    deliverySection.appendChild(deliveryText);
+    
+    // Добавляем секцию и разделитель в основной контейнер
+    infoBox.appendChild(deliverySection);
+    infoBox.appendChild(document.createElement('hr'));
+  
+    // Вторая секция - Безопасная оплата
+    const paymentSection = document.createElement('div');
+    paymentSection.className = 'info-item';
+    
+    const paymentTitle = document.createElement('h3');
+    paymentTitle.textContent = 'Безопасная оплата удобным способом';
+    
+    const paymentText = document.createElement('p');
+    paymentText.textContent = 'Оплачивайте картой, наличными или в рассрочку';
+    
+    const paymentIcons = document.createElement('div');
+    paymentIcons.className = 'payment-icons';
+  
+    // Создаем изображения для иконок оплаты
+    
+      const img = document.createElement('img');
+      img.src = '\cards.png'
+     
+    paymentSection.appendChild(paymentTitle);
+    paymentSection.appendChild(paymentText);
+    paymentIcons.appendChild(img)
+    paymentSection.appendChild(paymentIcons);
+    
+    // Добавляем секцию и разделитель в основной контейнер
+    infoBox.appendChild(paymentSection);
+    infoBox.appendChild(document.createElement('hr'));
+  
+    // Третья секция - Возврат
+    const returnSection = document.createElement('div');
+    returnSection.className = 'info-item';
+    
+    const returnTitle = document.createElement('h3');
+    returnTitle.textContent = 'Простой и быстрый возврат';
+    
+    const returnText = document.createElement('p');
+    returnText.textContent = 'Прием товаров в течение 10 дней и сразу вернём деньги';
+    
+    returnSection.appendChild(returnTitle);
+    returnSection.appendChild(returnText);
+  
+    // Добавляем последнюю секцию в основной контейнер
+    infoBox.appendChild(returnSection);
+
     productButtons.appendChild(addToCartButton);
     productButtons.appendChild(addToFavoritesButton);
 
     // Собираем все элементы для деталей продукта
     productDetails.appendChild(productTitle);
+    productDetails.append(ratingDiv)
     productDetails.appendChild(costBoxDiv);
     productDetails.appendChild(productQuantity);
     productDetails.appendChild(productDescription);
     productDetails.appendChild(productButtons);
+    productDetails.appendChild(infoBox)
 
     return productDetails
 }

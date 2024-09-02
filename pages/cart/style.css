@@ -5,11 +5,15 @@
 }
 
 
+
 .swiper-box{
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .vertical-swiper {
@@ -57,13 +61,12 @@
 }
 
 .product-container {
+  background-color: black;
   display: flex;
-  align-items: center;
-  
   width: 100%;
-  gap: 40px;
-    margin: 20px auto;
-  padding: 20px;
+  justify-content: space-between;
+ position: relative;
+  padding: 20px 30px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -94,7 +97,6 @@
 }
 
 .product-details {
-  width: 60%;
   padding-left: 20px;
 }
 
@@ -104,17 +106,24 @@ h1 {
 }
 
 .product-price {
-  margin: 10px 0;
+  margin: 15px 0;
   font-size: 18px;
 }
 
-.current-price {
-  color: #e63946;
-  font-weight: bold;
-  margin-right: 10px;
+.current-price, .sale {
+  padding: 3px;
+font-size: 28px;
+font-weight: 600;
+line-height: 34.3px;
 }
 
-.old-price {
+.old-price, .cost {
+font-size: 21px;
+padding-top: 10px;
+font-weight: 500;
+line-height: 25.47px;
+text-align: left;
+
   text-decoration: line-through;
   color: #777;
 }
@@ -128,27 +137,43 @@ h1 {
 }
 
 .product-quantity button {
-  background-color: #ddd;
-  border: none;
-  padding: 5px 10px;
+font-size: larger;
+font-weight: bold;
+background-color: white;
+  padding: 10px 15px;
+  border-radius: 3px;
   cursor: pointer;
+  border: 1px solid gray;
 }
 
 .product-quantity input {
-  width: 40px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  width: 50px;
   text-align: center;
+  padding: 5px;
   margin: 0 5px;
 }
 
+.rating{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: larger;
+  color: rgb(103, 101, 101);
+}
+.rating img{
+  width: 30px;
+}
 .product-description {
   color: #333;
   margin-bottom: 20px;
 }
 
 .product-buttons button {
-  padding: 10px 20px;
+  padding: 15px 20px;
   margin-right: 10px;
-  border: none;
+  border: 2px solid  #7000ff;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
@@ -164,4 +189,49 @@ h1 {
   color: #7000ff;
   border:  1px solid black;
   border-radius: 5px;
+}
+
+.info-box {
+  margin-top: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+.info-item {
+
+  margin-bottom: 12px;
+}
+
+.info-item h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.info-item p {
+  margin: 4px 0 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.payment-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.payment-icons img {
+  width: 36px; /* Размер иконок можно настроить по своему вкусу */
+  height: auto;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid black;
+  margin: 8px 0;
 }
