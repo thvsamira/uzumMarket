@@ -65,7 +65,7 @@ export function makeHeader() {
             </div>
             <div class="basket-box active">
             <img src="/95-shopping-512.webp" alt="">
-            <a href="" class="korzina none-decoration">Корзина <span class="quantity">3</span></a>
+            <a href="/pages/basket/" class="korzina none-decoration">Корзина <span class="quantity">3</span></a>
             </div>
         </div>
     </div>

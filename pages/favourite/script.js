@@ -7,14 +7,12 @@ const favoriteIds = favorites.map(item => item.id);
 const backet = document.querySelector('.backet')
 
 if (favorites.length === 0) {
-    // Массив пустой - показываем корзину
     backet.classList.add('show');
     backet.classList.remove('hide');
 } else {
-    // Массив содержит элементы - скрываем корзину и отображаем избранные товары
     backet.classList.remove('show');
     backet.classList.add('hide');
-    createFav(favorites); // Функция для отображения элементов
+    createFav(favorites); 
 }
 function createFav(favorites) {
 
@@ -50,21 +48,23 @@ function createFav(favorites) {
         const pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         pathElement.setAttribute('d', 'M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z');
         
-        // Инициализация массива favorites из localStorage или пустого массива
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        
+
+        if (favorites.some(fav => fav.id === item.id)) {
+            likeIconDiv.classList.add('fill');
+        }
+
         likeIconDiv.addEventListener('click', function() {
             this.classList.toggle('fill');
-        
+
             if (this.classList.contains('fill')) {
                 if (!favorites.some(fav => fav.id === item.id)) {
                     favorites.push(item);
                 }
                 localStorage.setItem('favorites', JSON.stringify(favorites));
-                localStorage.setItem('liked', item.id)
+                localStorage.setItem('liked', item.id);
             } else {
                 favorites = favorites.filter(fav => fav.id !== item.id);
-                // Обновляем localStorage
                 localStorage.setItem('favorites', JSON.stringify(favorites));
             }
         });

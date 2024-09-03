@@ -117,15 +117,17 @@ font-weight: 600;
 line-height: 34.3px;
 }
 
+
 .old-price, .cost {
+  color: black;
 font-size: 21px;
 padding-top: 10px;
 font-weight: 500;
 line-height: 25.47px;
 text-align: left;
+font-weight: bold;
 
-  text-decoration: line-through;
-  color: #777;
+ 
 }
 
 .product-quantity {
