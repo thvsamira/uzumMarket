@@ -12,7 +12,7 @@ export function makeHeader() {
                <div class="right-header-cont">
                    <a href="" class="sale-in-uzum">Продавайте на Uzum</a>
                    <a href="" class="none-decoration">Вопрос-ответ</a>
-                   <a href="" class="none-decoration">Мои заказы</a>
+                   <a href="/pages/account/" class="none-decoration account">Мои заказы</a>
                </div>
            </div>
 
@@ -155,26 +155,4 @@ export function makeFooter() {
 	`;
 }
 
-export function modal() {
-	let modal = document.querySelector('.modal')
-	modal.innerHTML = `
-
-    <div class="modal__dialog">
-      <div class="modal__content">
-        <form action="#" name="account">
-          <div data-close class="modal__close">&times;</div>
-          <div class="modal__title">Введите ваши данные</div>
-          <div class="modal__text">Отправим смс с кодом подтверждения</div>
-          <input required placeholder="Ваше имя" name="name" type="text" class="modal__input required">
-          <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input required">
-          <button class="btn btn_dark btn_min">Получить код</button>
-          <p class="privacy-text">Авторизуясь, вы соглашаетесь c <a href="" class="blue-text">политикой <br>  
-            обработки персональных данных</a> </p>
-        </form>
-      </div>
-    </div>
-
-	`
-
-}
 

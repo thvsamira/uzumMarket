@@ -69,6 +69,7 @@
 
 .like-icon {
   position: absolute;
+  z-index: 10;
   top: 8px;
   left: 213px;
 background: none;
@@ -172,7 +173,7 @@ cursor: pointer;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 2;
+  z-index: 10;
   }
   }
 }

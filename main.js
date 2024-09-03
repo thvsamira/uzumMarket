@@ -1,44 +1,38 @@
-// import { Genres } from "./components/genres";
 import { CreateItem } from "./components/createItems";
-// import { MakeCatalog } from "./components/modal";
-import { makeFooter, makeHeader, modal} from "./components/required";
+import { makeFooter, makeHeader} from "./components/required";
 import { getData } from "./libs/http";
 import { mainSwiper, reload } from "./libs/utils";
-modal()
 makeHeader()
 mainSwiper()
 makeFooter()
 
-// const form = document.forms[0]
-// const inputs = document.querySelectorAll('.required')
+const modalOpen = document.querySelector('.user-box')
+const modal = document.querySelector('.modal')
+const modalClose = document.querySelector('.modal__close')
+modalOpen.onclick = () => {
+  modal.style.display = 'block'
+}
 
-// form.onsubmit = (e) =>  {
-//   e.preventDefault()
+modalClose.onclick = () => {
+  modal.style.display = 'none'
+}
 
-//   let user = {}
-//   let fn = new FormData(form)
-//   let token = generateToken();
-//   let userId= localStorage.getItem('userId')
-
-//   fn.forEach((value, key) => {
-//     user[key] = value;
-//   })
-//   console.log(user);
-
-// }
-
-// function generateToken() {
-//   const characters = "ADYUGKGLkhjgguaihfuuoh868658780"
-
-//   let res = ""
-//   for (let i = 0; i < 10; i++) {
-//       let random = Math.floor(Math.random() * characters.length)
-//       res += characters[random]
-//   }
-//   return res;
-// }
+let token = localStorage.getItem("token")
+getData(`users?token=${token}`)
+.then(res => {
+    showUser(res.data[0])
+})
+.catch(error => console.log(error))
 
 
+export function showUser(user) {
+
+let name = document.querySelector('.user-name')
+
+name.textContent = user.name
+
+
+}
 getData('goods')
   .then(res => {    
         const categorizedGoods = {
@@ -53,6 +47,5 @@ getData('goods')
         reload(categorizedGoods.TV.slice(0,5), 'TV', CreateItem)  
         reload(categorizedGoods.kitchen.slice(0,5), 'kitchen', CreateItem)  
         reload(categorizedGoods.PC.slice(5,10), 'PC', CreateItem)  
-        // reload(res.data, 'dropdown', MakeCatalog)
       })
   .catch(error => console.error(error))
