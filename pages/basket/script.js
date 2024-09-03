@@ -7,7 +7,6 @@ let backet = JSON.parse(localStorage.getItem('backet')) || [];
 
 function itemsInBacket() {
     const cartItemsContainer = document.querySelector('.cart-items');
-    cartItemsContainer.innerHTML = ''; 
 
     backet.forEach(item => {
         const cartItem = document.createElement('div');
@@ -27,7 +26,7 @@ function itemsInBacket() {
 
         const itemPrice = document.createElement('p');
         itemPrice.classList.add('item-price');
-        itemPrice.textContent = `${item.price} сум`;
+        itemPrice.textContent = `${item.price * (item.count || 1)} сум`; 
 
         const quantityControls = document.createElement('div');
         quantityControls.classList.add('quantity-controls');
@@ -54,14 +53,17 @@ function itemsInBacket() {
         increaseBtn.onclick = () => {
             item.count = (item.count || 1) + 1; 
             quantityInput.value = item.count;
+            itemPrice.textContent = `${item.price * item.count} сум`; 
             localStorage.setItem('backet', JSON.stringify(backet)); // Save updated cart to localStorage
             calculateTotal(backet); 
+            updateCartQuantity()
         };
 
         decreaseBtn.onclick = () => {
             if (item.count > 1) {
                 item.count -= 1; 
                 quantityInput.value = item.count;
+                itemPrice.textContent = `${item.price * item.count} сум`; 
             } else {
                 alert('Товар был удален');
                 backet.splice(backet.indexOf(item), 1); 
@@ -93,14 +95,29 @@ function itemsInBacket() {
     });
 
     calculateTotal(backet); 
+    updateCartQuantity()
 }
 
 function calculateTotal(backet) {
-    const totalPriceElement = document.querySelector('.summary-total'); 
+      const totalPriceElement = document.querySelector('.summary-total');
+      const totalPrice = backet.reduce((acc, item) => acc + (item.price * (item.count || 1)), 0);
+      totalPriceElement.textContent = `Общая сумма: ${totalPrice} сум`;
+  
+      const totalItems = backet.reduce((acc, item) => acc + (item.count || 1), 0);
+  
+      const totalItemsElement = document.querySelector('.summary-details');
+      totalItemsElement.textContent = `Итого товаров: ${totalItems}`;
+}
 
-    const totalPrice = backet.reduce((acc, item) => acc + (item.price * (item.count || 1)), 0);
+export function updateCartQuantity() {
+    // Get the span element where the cart quantity is displayed
+    const quantityElement = document.querySelector('.quantity');
 
-    totalPriceElement.textContent = `Общая сумма: ${totalPrice} сум`;
+    // Calculate the total number of items in the cart
+    const totalQuantity = backet.reduce((acc, item) => acc + (item.count || 1), 0);
+
+    // Update the quantity element with the total quantity
+    quantityElement.innerHTML = totalQuantity;
 }
 
 itemsInBacket();

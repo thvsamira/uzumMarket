@@ -4,7 +4,6 @@ import { CreateItem } from "./components/createItems";
 import { makeFooter, makeHeader, modal} from "./components/required";
 import { getData } from "./libs/http";
 import { mainSwiper, reload } from "./libs/utils";
-
 modal()
 makeHeader()
 mainSwiper()
