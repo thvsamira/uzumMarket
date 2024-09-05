@@ -1,19 +1,39 @@
 import { makeFooter, makeHeader } from "../../components/required";
-
+import { getData } from "../../libs/http";
+import { catalog, openModal, showUser } from "../../scripts/script";
 makeFooter()
 makeHeader()
+openModal()
+catalog()
+let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
+let backet = document.querySelector('.backet');
+let summary = document.querySelector('.cart-sum');
 
-let backet = JSON.parse(localStorage.getItem('backet')) || [];
+function updateBacketDisplay() {
+    if (backetArr.length === 0) {
+        backet.classList.add('show');
+        backet.classList.remove('hide');
+        summary.classList.add('hide');
+        summary.classList.remove('show');
+    } else {
+        backet.classList.remove('show');
+        backet.classList.add('hide');
+        summary.classList.add('show');
+        summary.classList.remove('hide');
+        itemsInBacket();
+    }
+}
 
 function itemsInBacket() {
     const cartItemsContainer = document.querySelector('.cart-items');
+    cartItemsContainer.innerHTML = ''; 
 
-    backet.forEach(item => {
+    backetArr.forEach(item => {
         const cartItem = document.createElement('div');
         cartItem.classList.add('cart-item');
 
         const productImage = document.createElement('img');
-        productImage.src = item.media[0]; 
+        productImage.src = item.media[0];
         productImage.alt = 'Product Image';
         productImage.classList.add('product-image');
 
@@ -26,7 +46,7 @@ function itemsInBacket() {
 
         const itemPrice = document.createElement('p');
         itemPrice.classList.add('item-price');
-        itemPrice.textContent = `${item.price * (item.count || 1)} сум`; 
+        itemPrice.textContent = `${item.price * (item.count || 1)} сум`;
 
         const quantityControls = document.createElement('div');
         quantityControls.classList.add('quantity-controls');
@@ -37,7 +57,7 @@ function itemsInBacket() {
 
         const quantityInput = document.createElement('input');
         quantityInput.type = 'number';
-        quantityInput.value = item.count || 1; // Use item count or default to 1
+        quantityInput.value = item.count || 1;
         quantityInput.min = '1';
         quantityInput.classList.add('quantity-input');
 
@@ -49,39 +69,42 @@ function itemsInBacket() {
         quantityControls.appendChild(quantityInput);
         quantityControls.appendChild(increaseBtn);
 
-
+        // Increase quantity handler
         increaseBtn.onclick = () => {
-            item.count = (item.count || 1) + 1; 
+            item.count = (item.count || 1) + 1;
             quantityInput.value = item.count;
-            itemPrice.textContent = `${item.price * item.count} сум`; 
-            localStorage.setItem('backet', JSON.stringify(backet)); // Save updated cart to localStorage
-            calculateTotal(backet); 
-            updateCartQuantity()
+            itemPrice.textContent = `${item.price * item.count} сум`;
+            localStorage.setItem('backet', JSON.stringify(backetArr));
+            calculateTotal();
+            updateCartQuantity();
         };
 
+        // Decrease quantity handler
         decreaseBtn.onclick = () => {
             if (item.count > 1) {
-                item.count -= 1; 
+                item.count -= 1;
                 quantityInput.value = item.count;
-                itemPrice.textContent = `${item.price * item.count} сум`; 
+                itemPrice.textContent = `${item.price * item.count} сум`;
             } else {
                 alert('Товар был удален');
-                backet.splice(backet.indexOf(item), 1); 
-                itemsInBacket(); 
+                backetArr.splice(backetArr.indexOf(item), 1);
+                updateBacketDisplay();
             }
-            localStorage.setItem('backet', JSON.stringify(backet)); 
-            calculateTotal(backet); 
+            localStorage.setItem('backet', JSON.stringify(backetArr));
+            calculateTotal();
+            itemsInBacket();
         };
 
-        //  delete button
+        // Delete button handler
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-btn');
         deleteBtn.textContent = 'Удалить';
         deleteBtn.onclick = () => {
-            backet.splice(backet.indexOf(item), 1); 
-            localStorage.setItem('backet', JSON.stringify(backet)); 
-            itemsInBacket(); 
-            calculateTotal(backet); 
+            backetArr.splice(backetArr.indexOf(item), 1);
+            localStorage.setItem('backet', JSON.stringify(backetArr));
+            itemsInBacket();
+            calculateTotal();
+            updateBacketDisplay();
         };
 
         itemDetails.appendChild(itemTitle);
@@ -94,30 +117,31 @@ function itemsInBacket() {
         cartItemsContainer.appendChild(cartItem);
     });
 
-    calculateTotal(backet); 
-    updateCartQuantity()
+    calculateTotal();
+    updateCartQuantity();
 }
 
-function calculateTotal(backet) {
-      const totalPriceElement = document.querySelector('.summary-total');
-      const totalPrice = backet.reduce((acc, item) => acc + (item.price * (item.count || 1)), 0);
-      totalPriceElement.textContent = `Общая сумма: ${totalPrice} сум`;
-  
-      const totalItems = backet.reduce((acc, item) => acc + (item.count || 1), 0);
-  
-      const totalItemsElement = document.querySelector('.summary-details');
-      totalItemsElement.textContent = `Итого товаров: ${totalItems}`;
+export function calculateTotal() {
+    const totalPriceElement = document.querySelector('.summary-total');
+    const totalPrice = backetArr.reduce((acc, item) => acc + (item.price * (item.count || 1)), 0);
+    totalPriceElement.textContent = `Общая сумма: ${totalPrice} сум`;
+
+    const totalItems = backetArr.reduce((acc, item) => acc + (item.count || 1), 0);
+    const totalItemsElement = document.querySelector('.summary-details');
+    totalItemsElement.textContent = `Итого товаров: ${totalItems}`;
 }
 
-export function updateCartQuantity() {
-    // Get the span element where the cart quantity is displayed
+ export function updateCartQuantity() {
+    
     const quantityElement = document.querySelector('.quantity');
-
-    // Calculate the total number of items in the cart
-    const totalQuantity = backet.reduce((acc, item) => acc + (item.count || 1), 0);
-
-    // Update the quantity element with the total quantity
-    quantityElement.innerHTML = totalQuantity;
+    quantityElement.textContent = backetArr.length
 }
 
-itemsInBacket();
+updateBacketDisplay();
+
+let token = localStorage.getItem("token")
+getData(`users?token=${token}`)
+.then(res => {
+  showUser(res.data[0])
+})
+.catch(error => console.log(error))

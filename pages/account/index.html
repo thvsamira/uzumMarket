@@ -8,35 +8,51 @@
     <link rel="stylesheet" href="/styles/required.css">
 </head>
 <body>
+    <header></header>
     <div class="container">
-        <header></header>
-        <h1 class="name">Самира Тохирова</h1>
+        <div class="modal">
+            <div class="modal__dialog">
+              <div class="modal__content">
+                <form action="#" name="account">
+                  <div data-close class="modal__close">&times;</div>
+                  <div class="modal__title">Введите ваши данные</div>
+                  <div class="modal__text">Отправим смс с кодом подтверждения</div>
+                  <input required placeholder="Ваше имя" name="name" type="text" class="modal__input required">
+                  <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input required">
+                  <button class="btn btn_dark btn_min">Получить код</button>
+                  <p class="privacy-text">Авторизуясь, вы соглашаетесь c <a href="" class="blue-text">политикой <br>  
+                    обработки персональных данных</a> </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        <h1 class="name"></h1>
         <div class="box">
 
     
             <div class="sidebar">
                 <ul>
-                    <li class="active">Мои заказы</li>
-                    <li>Мои данные</li>
+                    <li>Мои заказы</li>
+                    <li class="active">Мои данные</li>
                 </ul>
             </div>
     
             <div class="content">
-                <h2>Мои данные</h2>
+                <h2 >Мои данные</h2>
                 <form action="#" name="account" class="form-data">
                     <div class="form-group">
                         <label for="last-name">Фамилия *</label>
-                        <input type="text" id="last-name" name="last-name" placeholder="Тохирова" required>
+                        <input type="text" id="last-name" name="last-name" placeholder="" required class="required">
                     </div>
     
                     <div class="form-group">
                         <label for="first-name">Имя *</label>
-                        <input type="text" id="first-name" name="first-name" placeholder="Самира" required>
+                        <input type="text" id="first-name" name="first-name" placeholder="" required class="required">
                     </div>
     
                     <div class="form-group">
                         <label for="middle-name">Отчество</label>
-                        <input type="text" id="middle-name" name="middle-name" placeholder="">
+                        <input type="text" id="middle-name" name="middle-name" placeholder="" class="required">
                     </div>
     
                     <div class="form-group">
@@ -59,7 +75,7 @@
     
                     <div class="form-group">
                         <label for="phone">Номер телефона *</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+998 93 602-35-50">
+                        <input type="tel" id="phone" name="phone" placeholder="">
                     </div>
     
                     <button type="submit" class="logout-btn">Выйти из системы</button>

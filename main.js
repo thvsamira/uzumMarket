@@ -2,37 +2,31 @@ import { CreateItem } from "./components/createItems";
 import { makeFooter, makeHeader} from "./components/required";
 import { getData } from "./libs/http";
 import { mainSwiper, reload } from "./libs/utils";
+import {  renderUser } from "./pages/account/script";
+import { catalog, openModal, showUser } from "./scripts/script";
 makeHeader()
 mainSwiper()
 makeFooter()
-
-const modalOpen = document.querySelector('.user-box')
-const modal = document.querySelector('.modal')
-const modalClose = document.querySelector('.modal__close')
-modalOpen.onclick = () => {
-  modal.style.display = 'block'
+openModal()
+catalog()
+export function totalQuantity () {
+let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
+let quantity = document.querySelector('.quantity')
+quantity.textContent = backetArr.length
 }
-
-modalClose.onclick = () => {
-  modal.style.display = 'none'
-}
+totalQuantity()
 
 let token = localStorage.getItem("token")
 getData(`users?token=${token}`)
 .then(res => {
-    showUser(res.data[0])
+  showUser(res.data[0])
+  renderUser(res.data[0])
+
 })
 .catch(error => console.log(error))
 
 
-export function showUser(user) {
 
-let name = document.querySelector('.user-name')
-
-name.textContent = user.name
-
-
-}
 getData('goods')
   .then(res => {    
         const categorizedGoods = {

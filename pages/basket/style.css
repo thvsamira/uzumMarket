@@ -1,7 +1,58 @@
-/* styles.css */
+.container{
+  max-width: 1440px;
+  padding: 10px 30px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.backet-box{
+  margin-top: 80px;
+display: flex;
+
+flex-direction: column;
+align-items: center;
+gap: 20px;
+justify-content: center;
+padding: 0 20px 40px;
+
+h2{
+font-size: 32px;
+font-weight: 600;
+line-height: 39.2px;
+text-align: center;
+
+}
+
+p{
+  padding-top: 10px;
+font-size: 14px;
+font-weight: 500;
+line-height: 16.98px;
+text-align: center;
+
+}
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+display: none;
+}
 
 
-  
+.favourite-box{
+  margin-top: 30px;
+
+}
+h1{
+font-size: 32px;
+font-weight: 600;
+line-height: 39.2px;
+text-align: left;
+
+}
   .cart-container {
     margin-top: 50px;
     display: flex;

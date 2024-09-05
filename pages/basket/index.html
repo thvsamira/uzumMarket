@@ -13,20 +13,53 @@
 <body>
     <header></header>
     <div class="container">
+      <div class="modal">
+        <div class="modal__dialog">
+          <div class="modal__content">
+          <form action="#" name="account">
+            <div data-close class="modal__close">&times;</div>
+            <div class="modal__title">Введите ваши данные</div>
+            <div class="modal__text">Отправим смс с кодом подтверждения</div>
+            <input required placeholder="Ваше имя" name="name" type="text" class="modal__input required" id="first-name">
+            <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input required" id="phone">
+            <button class="btn btn_dark btn_min">Получить код</button>
+            <p class="privacy-text">Авторизуясь, вы соглашаетесь c <a href="" class="blue-text">политикой <br>  
+            обработки персональных данных</a> </p>
+          </form>
+          </div>
+        </div>
+        </div>
+
+      <section class="backet">
+
+        <div class="backet-box">
+            <div class="backet-img">
+                <img src="/public/hearts 1fav.png" alt="">
+            </div>
+            <div class="backet-text">
+                <h2>В корзине пока нет товаров
+                    </h2>
+
+                    <p>Начните с подборок на главной странице или найдите нужный товар через поиск</p>
+            </div>
+        </div>
+    </section>
+
         <div class="cart-container">
-            <!-- Left section with items -->
             <div class="cart-items" >      
             </div>
         
-            <!-- Right section with summary -->
             <div class="cart-summary">
-              <h2 class="summary-total">1 650 000 сум</h2>
-              <p class="summary-details">Итого товаров: 14</p>
-              <p class="summary-details">Итого скидка: 244 000 сум</p>
-              <button class="checkout-btn">Оформить</button>
+              <div class="cart-sum">
+
+                <h2 class="summary-total"></h2>
+                <p class="summary-details"></p>
+                <button class="checkout-btn">Оформить</button>
+              </div>
             </div>
           </div>
           <footer></footer>
+
     </div>
 </body>
 <script type="module" src="./script.js"></script>
