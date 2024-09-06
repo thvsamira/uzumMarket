@@ -21,4 +21,17 @@ async function postData(path, body) {
 
 }
 
-export{ getData, postData}
+
+async function deleteUser(path) {
+   try {
+      let res = await axios.delete(`${url}/${path}`)
+      return res
+   } catch (error) {
+        console.error(error);
+   }
+  
+}
+
+
+
+export{ getData, postData, deleteUser}

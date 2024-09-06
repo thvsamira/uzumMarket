@@ -25,6 +25,7 @@
 }
 .place__items{
 
+  margin-top: 40px;
   .item-box{
     padding-bottom: 30px;
     margin-top: 20px;
@@ -192,6 +193,11 @@ cursor: pointer;
     font-weight: 500;
     font-family: Inter;
     padding: 8px 120px;
+
+    a{
+      text-decoration: none;
+      color: black;
+    }
   }
 }
 

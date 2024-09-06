@@ -207,7 +207,16 @@ if (item.salePercentage) {
     const plusButton = document.createElement('button');
     plusButton.textContent = '+';
 
-    
+  // Обработчики событий для изменения количества
+  minusButton.onclick = () => {
+    if (quantityInput.value > 1) {
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+    }
+};
+
+plusButton.onclick = () => {
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+};    
 
     productQuantity.appendChild(minusButton);
     productQuantity.appendChild(quantityInput);
@@ -235,8 +244,6 @@ if (item.salePercentage) {
             backet.push(item); 
             localStorage.setItem('backet', JSON.stringify(backet)); 
     
-            console.log('Товар добавлен в корзину:', item);
-            console.log('Текущая корзина:', backet);
         };
 
     const addToFavoritesButton = document.createElement('button');
@@ -322,27 +329,10 @@ if (item.salePercentage) {
 }
 
 
+
 export function DisplayImg(item) {
-    const fragment = document.createDocumentFragment(); // Используем фрагмент для оптимальной вставки
- 
-    // verticalSwiper.className = 'vertical-swiper';
-    // verticalSwiper.id = 'vertical-swiper';
+    const fragment = document.createDocumentFragment(); 
 
-    // // Добавляем изображения в вертикальный слайдер
-    // const verticalImgBox1 = document.createElement('div');
-    // verticalImgBox1.className = 'vertical-img-box';
-    // const verticalImg1 = document.createElement('img');
-    // verticalImg1.src = item.media[0];
-    // verticalImg1.alt = '';
-    // verticalImg1.className = 'vertical-img';
-    // verticalImgBox1.appendChild(verticalImg1);
-
-
-    // // Добавляем созданные элементы в вертикальный слайдер
-    // verticalSwiper.appendChild(verticalImgBox1);
-
-    // Добавляем слайдеры в контейнер
-    // swiperBox.appendChild(verticalSwiper);
     item.media.forEach((imageSrc) => {
   
         // Создаем контейнер для слайда
@@ -354,7 +344,7 @@ export function DisplayImg(item) {
 
         // Создаем элемент изображения
         const img = document.createElement('img');
-        img.src = imageSrc; // Устанавливаем URL изображения из массива
+        img.src = imageSrc; 
         img.alt = 'Product Image';
 
         // Встраиваем элементы друг в друга
@@ -365,7 +355,7 @@ export function DisplayImg(item) {
         fragment.append(swiperSlide);
     });
 
-    return fragment; // Возвращаем фрагмент, содержащий все слайды
+    return fragment; 
 }
 
 

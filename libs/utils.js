@@ -39,4 +39,14 @@ function cartSwiper() {
   });
 }
 
-export{ reload, mainSwiper, cartSwiper }
+function debounce(fn, ms) {
+  let timeout;
+  return function(...args) {
+      clearTimeout(timeout); 
+      timeout = setTimeout(() => {
+          fn.apply(this, args); 
+      }, ms);
+  }
+}
+
+export{ reload, mainSwiper, cartSwiper, debounce }

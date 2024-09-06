@@ -3,12 +3,14 @@ import { makeFooter, makeHeader} from "./components/required";
 import { getData } from "./libs/http";
 import { mainSwiper, reload } from "./libs/utils";
 import {  renderUser } from "./pages/account/script";
-import { catalog, openModal, showUser } from "./scripts/script";
+import { catalog, openModal, showUser, signIn } from "./scripts/script";
 makeHeader()
 mainSwiper()
 makeFooter()
 openModal()
 catalog()
+signIn()
+
 export function totalQuantity () {
 let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
 let quantity = document.querySelector('.quantity')

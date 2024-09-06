@@ -1,5 +1,5 @@
 import { makeFooter, makeHeader } from "../../components/required";
-import { getData } from "../../libs/http";
+import { deleteUser, getData} from "../../libs/http";
 import { catalog, openModal, showUser } from "../../scripts/script";
 makeHeader()
 makeFooter()
@@ -11,7 +11,6 @@ quantity.textContent = backetArr.length
 
 
 
-
 export function renderUser (user) {
 let firstName = document.getElementById('first-name')
 firstName.value = user.name
@@ -20,7 +19,22 @@ let number = document.getElementById('phone')
 number.value = user.phone
 }
 
-let token = localStorage.getItem("token")
+let token = localStorage.getItem("token");
+let logout = document.getElementById('logoutbtn');
+
+// logout.onclick = () => {
+//   deleteUser('users')
+//     .then(res => {
+//       localStorage.removeItem("token");
+//       localStorage.setItem('isRegistered', 'false')
+//       alert('Вы успешно вышли из системы');
+      
+//     })
+//     .catch(error => console.log('Ошибка при выходе:', error));
+// }
+
+
+
 getData(`users?token=${token}`)
 .then(res => {
    showUser(res.data[0])

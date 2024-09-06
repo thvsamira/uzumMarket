@@ -1,7 +1,7 @@
 import { getData, postData } from "../libs/http";
 
-const form = document.forms['account']; // or document.forms[0] if it's the first form
-const inputs = document.querySelectorAll('.required');
+export function signIn () {
+  const form = document.forms['account']; 
 form.onsubmit = (e) => {
   e.preventDefault(); 
 
@@ -13,24 +13,27 @@ form.onsubmit = (e) => {
     user[key] = value;
   });
 
-  getData(`users?name=${user.name}`)
+  getData(`users?name=${user['first-name']}`) 
   .then(res => {
     if (res.data.length > 0) {
-        alert('Пользователь с таким именем уже зарегистрирован')
-    }else{
-         if(validateInputs()){
-            postData('users', { token, ...user })
-            .then((res) => {
-                localStorage.setItem("token", res.data.token)    
-               
-            })
-            .catch((error) => console.log(error))
-    }
+      alert('Пользователь с таким именем уже зарегистрирован');
+    } else {
+      postData('users', { token, ...user })
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);  
+          alert('Регистрация успешна! Вы будете перенаправлены.');
+
+          localStorage.setItem("isRegistered", "true");
+
+        })
+        .catch((error) => console.log(error));
     }
   })
-      .catch(error => console.log(error))
-
+  .catch(error => console.log(error));
 };
+}
+
+
 
 function generateToken() {
   const characters = "ADYUGKGLkhjgguaihfuuoh868658780";
@@ -43,30 +46,38 @@ function generateToken() {
   return res; 
 }
 
+
 export function showUser(user) {
 
   let name = document.querySelector('.user-name')
-  let name2 = document.querySelector('.name')
 
   name.textContent = user.name
-  name2.textContent = user.name
   
   }
-
-  export function openModal () {
-    const modalOpen = document.querySelector('.user-box')
-const modal = document.querySelector('.modal')
-const modalClose = document.querySelector('.modal__close')
-modalOpen.onclick = () => {
-  modal.style.display = 'block'
-  modal.classList.add('fade')
-}
-
-modalClose.onclick = () => {
-  modal.style.display = 'none'
-}
-
-}
+ 
+  export function openModal() {
+    const modalOpen = document.querySelector('.user-box'); 
+    const modal = document.querySelector('.modal'); 
+    const modalClose = document.querySelector('.modal__close'); 
+  
+    modalOpen.onclick = () => {
+      const isRegistered = localStorage.getItem("isRegistered") === "true"; 
+  
+      if (!isRegistered) {
+         modal.style.display = 'block';
+         modal.classList.add('fade');
+       
+      } else {
+        window.location.href = '/pages/account/';
+      }
+    };
+  
+    modalClose.onclick = () => {
+      modal.style.display = 'none';
+    };
+  }
+  
+  
  export function catalog () {
   let catalog = document.querySelector('.dropdown-content');
 let openC = document.querySelector('.dropbtn');

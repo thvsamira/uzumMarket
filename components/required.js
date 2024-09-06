@@ -114,19 +114,19 @@ export function makeFooter() {
 							<h3>Uzum в соцсетях</h3>
 							<div class="social-links__apps">
 								<a href="#">
-									<img src="/images/socials/instagram.svg" alt="" />
+									<img src="/socials/instagram.svg" alt="" />
 								</a>
 
 								<a href="#">
-									<img src="/images/socials/telegram.svg" alt="" />
+									<img src="/socials/telegram.svg" alt="" />
 								</a>
 
 								<a href="#">
-									<img src="/images/socials/youtube.svg" alt="" />
+									<img src="/socials/youtube.svg" alt="" />
 								</a>
 
 								<a href="#">
-									<img src="/images/socials/facebook.svg" alt="" />
+									<img src="/socials/facebook.svg" alt="" />
 								</a>
 							</div>
 						</div>

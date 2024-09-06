@@ -27,6 +27,7 @@
   .modal__dialog {
 	display: flex;
 	max-width: 430px;
+	width: 100%;
 	margin: 150px 500px;
   }
   
@@ -137,7 +138,6 @@ header{
 }
 
 .header-box{
-  padding: 5px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -199,7 +199,8 @@ border-radius: 4px;
 .dropdown-content {
 	height: 50vh;
 	visibility: hidden;
-	padding: 25px;
+	padding: 30px;
+	
   width: 1380px;
   position: absolute;
   top: 48px;
@@ -209,7 +210,6 @@ border-radius: 4px;
   z-index: 20;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
   .dropdown-content.visible {
@@ -239,6 +239,7 @@ border-radius: 4px;
 	font-weight: 600;
 	line-height: 39.2px;
 	text-decoration: none;
+	padding-left: 330px;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -250,6 +251,7 @@ border-radius: 4px;
 
 
 .second-header{
+	width: 100%;
 	position: relative;
   margin-top: 8px;
   display: flex;
@@ -267,8 +269,8 @@ border-radius: 4px;
   align-items: center;
 
   input{
-    padding: 5px 10px;
-    width: 600px;
+	width: 500px;
+	padding: 0 calc(15% + 38px) 0 16px;
     height: 37px;
     border-radius: 0px;
     border: 2px solid #f0f2f5;
@@ -313,6 +315,11 @@ line-height: 14.56px;
   padding: 3px 6px;
   color: white;
   border-radius: 3px;
+}
+
+.goods-numb{
+	color: #7000FF;
+	font-size: smaller;
 }
 
 
@@ -490,3 +497,9 @@ footer {
 	}
 }
 
+.result-item {
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin-bottom: 10px;
+  }
+  
