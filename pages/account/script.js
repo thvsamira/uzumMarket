@@ -1,10 +1,12 @@
+import { makeModal } from "../../components/modal";
 import { makeFooter, makeHeader } from "../../components/required";
 import { deleteUser, getData} from "../../libs/http";
-import { catalog, openModal, showUser } from "../../scripts/script";
+import { catalog,  showUser } from "../../scripts/script";
 makeHeader()
 makeFooter()
-openModal()
 catalog()
+makeModal()
+
 let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
 let quantity = document.querySelector('.quantity')
 quantity.textContent = backetArr.length
@@ -12,28 +14,16 @@ quantity.textContent = backetArr.length
 
 
 export function renderUser (user) {
-let firstName = document.getElementById('first-name')
+let firstName = document.getElementById('name')
 firstName.value = user.name
 
-let number = document.getElementById('phone')
+let number = document.getElementById('phonenum')
 number.value = user.phone
 }
 
 let token = localStorage.getItem("token");
 let logout = document.getElementById('logoutbtn');
-
-// logout.onclick = () => {
-//   deleteUser('users')
-//     .then(res => {
-//       localStorage.removeItem("token");
-//       localStorage.setItem('isRegistered', 'false')
-//       alert('Вы успешно вышли из системы');
-      
-//     })
-//     .catch(error => console.log('Ошибка при выходе:', error));
-// }
-
-
+console.log(logout);
 
 getData(`users?token=${token}`)
 .then(res => {

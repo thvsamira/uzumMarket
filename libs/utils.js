@@ -48,5 +48,22 @@ function debounce(fn, ms) {
       }, ms);
   }
 }
+ function totalQuantity () {
+  let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
+  let quantity = document.querySelector('.quantity')
+  quantity.textContent = backetArr.length
+  }
 
-export{ reload, mainSwiper, cartSwiper, debounce }
+  function generateToken() {
+    const characters = "ADYUGKGLkhjgguaihfuuoh868658780";
+    let res = "";
+    for (let i = 0; i < 10; i++) {
+      let random = Math.floor(Math.random() * characters.length);
+      res += characters[random];
+    }
+    console.log(res); 
+    return res; 
+  }
+  
+
+export{ reload, mainSwiper, cartSwiper, debounce, totalQuantity, generateToken }

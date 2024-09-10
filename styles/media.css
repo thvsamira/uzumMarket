@@ -41,6 +41,16 @@
 }
 
 @media (max-width: 1040px){
+       .second-header {
+        input {
+            width: 250px;
+        }
+        .dropbtn{
+            padding: 6px 8px;
+        }
+    }
+
+
     .item-box{
 
         display: grid;
@@ -52,6 +62,8 @@
             position: absolute;
             left: 190px;
         }
+
+        
       }
 
       .swiper-button-next,
@@ -59,6 +71,7 @@
     position: absolute;
     top: 150px;
   }
+
 }
 
 @media (max-width: 1022px){
@@ -136,7 +149,8 @@
       }
 }
 
-@media (max-width: 768px){
+@media (max-width: 769px){
+
     .modal__dialog{
         margin: 90px 120px;
         max-width: 380px;
@@ -160,6 +174,7 @@
       .product-container{
         display: flex;
         flex-direction: column;
+        gap: 10px;
       }
 
       .product-details{

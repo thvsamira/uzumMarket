@@ -6,7 +6,7 @@
 
 .container{
     max-width: 1440px;
-    padding: 10px 30px;
+    padding: 10px 50px;
     width: 100%;
     margin: 0 auto;
 }
@@ -201,7 +201,8 @@ border-radius: 4px;
 	visibility: hidden;
 	padding: 30px;
 	
-  width: 1380px;
+  max-width: 1380px;
+  width: 100%;
   position: absolute;
   top: 48px;
   left: 0;
@@ -239,7 +240,6 @@ border-radius: 4px;
 	font-weight: 600;
 	line-height: 39.2px;
 	text-decoration: none;
-	padding-left: 330px;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
@@ -289,10 +289,13 @@ border-radius: 4px;
 .basket-box,
 .fav-box
 {
+
 	padding: 10px;
   display: flex;
   align-items: center;
   gap: 4px;
+
+
 
   img{
     width: 18px;

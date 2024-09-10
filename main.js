@@ -1,28 +1,21 @@
 import { CreateItem } from "./components/createItems";
+import { makeModal } from "./components/modal";
 import { makeFooter, makeHeader} from "./components/required";
 import { getData } from "./libs/http";
-import { mainSwiper, reload } from "./libs/utils";
+import { mainSwiper, reload, totalQuantity } from "./libs/utils";
 import {  renderUser } from "./pages/account/script";
-import { catalog, openModal, showUser, signIn } from "./scripts/script";
+import { catalog,  showUser} from "./scripts/script";
 makeHeader()
 mainSwiper()
 makeFooter()
-openModal()
 catalog()
-signIn()
-
-export function totalQuantity () {
-let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
-let quantity = document.querySelector('.quantity')
-quantity.textContent = backetArr.length
-}
 totalQuantity()
+makeModal()
 
 let token = localStorage.getItem("token")
 getData(`users?token=${token}`)
 .then(res => {
   showUser(res.data[0])
-  renderUser(res.data[0])
 
 })
 .catch(error => console.log(error))

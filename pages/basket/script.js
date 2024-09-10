@@ -1,10 +1,12 @@
+import { makeModal } from "../../components/modal";
 import { makeFooter, makeHeader } from "../../components/required";
 import { getData } from "../../libs/http";
-import { catalog, openModal, showUser } from "../../scripts/script";
+import { catalog,  showUser } from "../../scripts/script";
 makeFooter()
 makeHeader()
-openModal()
 catalog()
+makeModal()
+
 let backetArr = JSON.parse(localStorage.getItem('backet')) || [];
 let backet = document.querySelector('.backet');
 let summary = document.querySelector('.cart-sum');
@@ -121,6 +123,7 @@ function itemsInBacket() {
     updateCartQuantity();
 }
 
+ 
 export function calculateTotal() {
     const totalPriceElement = document.querySelector('.summary-total');
     const totalPrice = backetArr.reduce((acc, item) => acc + (item.price * (item.count || 1)), 0);
@@ -129,7 +132,9 @@ export function calculateTotal() {
     const totalItems = backetArr.reduce((acc, item) => acc + (item.count || 1), 0);
     const totalItemsElement = document.querySelector('.summary-details');
     totalItemsElement.textContent = `Итого товаров: ${totalItems}`;
+
 }
+
 
  export function updateCartQuantity() {
     

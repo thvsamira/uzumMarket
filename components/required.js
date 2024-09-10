@@ -56,7 +56,7 @@ export function makeHeader() {
 
             <div class="user-box active">
                 <img src="/Group 237729.png" alt="">
-                <span class="user-name">name</span>
+                <span class="user-name">Войти</span>
             </div>
 
             <div class="fav-box active">
@@ -101,11 +101,11 @@ export function makeFooter() {
 						<h3>Скачать приложение</h3>
 						<div class="download-app">
 							<a href="#" class="appstore">
-								<img src="/images/appstore.svg" alt="appstore" />
+								<img src="/appstore.svg" alt="appstore" />
 								<span>AppStore</span>
 							</a>
 							<a class="googleplay">
-								<img src="/images/googleplay.svg" alt="googleplay" />
+								<img src="/googleplay.svg" alt="googleplay" />
 								<span>Google Play</span>
 							</a>
 						</div>
@@ -114,19 +114,19 @@ export function makeFooter() {
 							<h3>Uzum в соцсетях</h3>
 							<div class="social-links__apps">
 								<a href="#">
-									<img src="/socials/instagram.svg" alt="" />
+									<img src="/instagram.svg" alt="" />
 								</a>
 
 								<a href="#">
-									<img src="/socials/telegram.svg" alt="" />
+									<img src="/telegram.svg" alt="" />
 								</a>
 
 								<a href="#">
-									<img src="/socials/youtube.svg" alt="" />
+									<img src="/youtube.svg" alt="" />
 								</a>
 
 								<a href="#">
-									<img src="/socials/facebook.svg" alt="" />
+									<img src="/facebook.svg" alt="" />
 								</a>
 							</div>
 						</div>

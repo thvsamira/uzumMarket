@@ -1,10 +1,12 @@
+import { makeModal } from "../../components/modal";
 import { makeFooter, makeHeader } from "../../components/required";
 import { getData } from "../../libs/http";
-import {  catalog, openModal, showUser } from "../../scripts/script";
+import {  catalog, showUser } from "../../scripts/script";
 makeHeader()
 makeFooter()
-openModal()
 catalog()
+makeModal()
+
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 const backet = document.querySelector('.backet');
 
@@ -59,9 +61,9 @@ function updateBacketDisplay() {
             likeIconDiv.classList.add('fill');
         }
         
-        likeIconDiv.addEventListener('click', function() {
+        likeIconDiv.addEventListener('click', function(event) {
             this.classList.toggle('fill');
-        
+           event.stopPropagation()
             if (this.classList.contains('fill')) {
                 if (!favorites.some(fav => fav.id === item.id)) {
                     favorites.push(item);
@@ -118,7 +120,8 @@ function updateBacketDisplay() {
         cartImg.alt = '';
         
         let baсket = JSON.parse(localStorage.getItem('baсket')) || [];
-        cartImg.onclick = () => {
+        cartImg.onclick = (event) => {
+            event.stopPropagation()
             baсket.push(item);
             localStorage.setItem('baсket', JSON.stringify(baсket));
         };

@@ -1,24 +1,18 @@
-
 export function CreateItem(item) {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
 
-    // div для изображения
     const imgBoxDiv = document.createElement('div');
     imgBoxDiv.className = 'img-box';
 
-    // img
     const imgElement = document.createElement('img');
     imgElement.src = item.media[0];
 
-    // Добавляем img в imgBoxDiv
     imgBoxDiv.appendChild(imgElement);
 
-    // Создаем div для иконки лайка
     const likeIconDiv = document.createElement('div');
     likeIconDiv.className = 'like-icon';
 
-    // Создаем SVG и добавляем его в likeIconDiv
     const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svgElement.setAttribute('viewBox', '0 0 24 24');
     svgElement.setAttribute('fill', 'none');
@@ -43,6 +37,8 @@ export function CreateItem(item) {
         event.stopPropagation(); 
         this.classList.toggle('fill');
 
+        favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
         if (this.classList.contains('fill')) {
             if (!favorites.some(fav => fav.id === item.id)) {
                 favorites.push(item);
@@ -54,21 +50,17 @@ export function CreateItem(item) {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
-    // Создаем div для информации
     const infoDiv = document.createElement('div');
     infoDiv.className = 'info';
 
-    // Создаем заголовок h2
     const titleH2 = document.createElement('h2');
     titleH2.className = 'title';
     titleH2.textContent =
         item.title.length > 70 ? item.title.slice(0, 70) + "..." : item.title;
 
-    // Создаем div для рейтинга
     const ratingDiv = document.createElement('div');
     ratingDiv.className = 'rating';
 
-    // Создаем элемент img для звезды
     const starImg = document.createElement('img');
     starImg.src = '/star-512.webp';
 
@@ -97,33 +89,27 @@ export function CreateItem(item) {
         saleP.textContent = `${Math.floor(item.price - (item.price * item.salePercentage) / 100)} сум`;
     }
 
-    // Добавляем p в costBoxDiv
     costBoxDiv.append(costP, saleP);
 
-    // Создаем кнопку для добавления в корзину
     const addCartButton = document.createElement('button');
     addCartButton.className = 'add-cart';
 
-    // Создаем элемент img для иконки корзины
     const cartImg = document.createElement('img');
     cartImg.src = '/shopping-cart 1.png';
     cartImg.alt = '';
 
     addCartButton.appendChild(cartImg);
 
-    let backet = JSON.parse(localStorage.getItem('backet'));
-
-if (!Array.isArray(backet)) {
-    backet = [];
-}
-
     cartImg.onclick = (event) => {
-        event.stopPropagation(); 
-        backet.push(item); 
+        event.stopPropagation()
+        let backet = JSON.parse(localStorage.getItem('backet')) || [];
+
+        if (!backet.some(b => b.id === item.id)) {
+            backet.push(item);
+        }
+
         localStorage.setItem('backet', JSON.stringify(backet)); 
 
-        console.log('Товар добавлен в корзину:', item);
-        console.log('Текущая корзина:', backet);
     };
 
     // Собираем все элементы вместе
@@ -143,6 +129,7 @@ if (!Array.isArray(backet)) {
 
     return itemDiv;
 }
+
 
 
 // Функция для создания и добавления элементов
@@ -207,7 +194,6 @@ if (item.salePercentage) {
     const plusButton = document.createElement('button');
     plusButton.textContent = '+';
 
-  // Обработчики событий для изменения количества
   minusButton.onclick = () => {
     if (quantityInput.value > 1) {
         quantityInput.value = parseInt(quantityInput.value) - 1;
@@ -241,7 +227,9 @@ plusButton.onclick = () => {
     
         addToCartButton.onclick = (event) => {
             event.stopPropagation(); 
-            backet.push(item); 
+            if (!backet.some(b => b.id === item.id)) {
+                backet.push(item);
+            }
             localStorage.setItem('backet', JSON.stringify(backet)); 
     
         };
@@ -250,10 +238,32 @@ plusButton.onclick = () => {
     addToFavoritesButton.className = 'add-to-favorites';
     addToFavoritesButton.textContent = 'Добавить в избранное';
 
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (favorites.some(fav => fav.id === item.id)) {
+        addToFavoritesButton.classList.add('fill');
+    }
+
+    addToFavoritesButton.addEventListener('click', function(event) {
+        event.stopPropagation(); 
+        this.classList.toggle('fill');
+
+        favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (this.classList.contains('fill')) {
+            if (!favorites.some(fav => fav.id === item.id)) {
+                favorites.push(item);
+            }
+        } else {
+            favorites = favorites.filter(fav => fav.id !== item.id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    });
     const infoBox = document.createElement('div');
     infoBox.className = 'info-box';
   
-    // Первая секция - Быстрая доставка
+    //  секция - Быстрая доставка
     const deliverySection = document.createElement('div');
     deliverySection.className = 'info-item';
     
@@ -266,11 +276,10 @@ plusButton.onclick = () => {
     deliverySection.appendChild(deliveryTitle);
     deliverySection.appendChild(deliveryText);
     
-    // Добавляем секцию и разделитель в основной контейнер
     infoBox.appendChild(deliverySection);
     infoBox.appendChild(document.createElement('hr'));
   
-    // Вторая секция - Безопасная оплата
+    // секция - Безопасная оплата
     const paymentSection = document.createElement('div');
     paymentSection.className = 'info-item';
     
@@ -282,22 +291,19 @@ plusButton.onclick = () => {
     
     const paymentIcons = document.createElement('div');
     paymentIcons.className = 'payment-icons';
-  
-    // Создаем изображения для иконок оплаты
-    
+      
       const img = document.createElement('img');
-      img.src = '\cards.png'
+      img.src = '/cards.png'
      
     paymentSection.appendChild(paymentTitle);
     paymentSection.appendChild(paymentText);
     paymentIcons.appendChild(img)
     paymentSection.appendChild(paymentIcons);
     
-    // Добавляем секцию и разделитель в основной контейнер
     infoBox.appendChild(paymentSection);
     infoBox.appendChild(document.createElement('hr'));
   
-    // Третья секция - Возврат
+    //  секция - Возврат
     const returnSection = document.createElement('div');
     returnSection.className = 'info-item';
     
@@ -310,13 +316,11 @@ plusButton.onclick = () => {
     returnSection.appendChild(returnTitle);
     returnSection.appendChild(returnText);
   
-    // Добавляем последнюю секцию в основной контейнер
     infoBox.appendChild(returnSection);
 
     productButtons.appendChild(addToCartButton);
     productButtons.appendChild(addToFavoritesButton);
 
-    // Собираем все элементы для деталей продукта
     productDetails.appendChild(productTitle);
     productDetails.append(ratingDiv)
     productDetails.appendChild(costBoxDiv);

@@ -1,15 +1,17 @@
 import {  CreateProductElement, DisplayImg} from "../../components/createItems";
-import { makeHeader } from "../../components/required";
+import { makeModal } from "../../components/modal";
+import { makeFooter, makeHeader } from "../../components/required";
 import { getData } from "../../libs/http";
-import { cartSwiper, mainSwiper, reload } from "../../libs/utils";
-import { totalQuantity } from "../../main";
-import { catalog, openModal, showUser } from "../../scripts/script";
+import { cartSwiper, mainSwiper, reload, totalQuantity } from "../../libs/utils";
+import { catalog,  showUser } from "../../scripts/script";
 cartSwiper()
 mainSwiper()
 makeHeader()
-totalQuantity()
-openModal()
+makeFooter()
 catalog()
+totalQuantity()
+makeModal()
+
 let slotId = localStorage.getItem('slotId')
 getData(`goods?id=${slotId}`)
 .then(res => {
